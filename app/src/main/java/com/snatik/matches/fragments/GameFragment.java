@@ -68,7 +68,7 @@ public class GameFragment extends BaseFragment {
 		startClock(time);
 	}
 	
-	void setTime(int time) {
+	public void setTime(int time) {
 		int min = time / 60;
 		int sec = time - min*60;
 		mTime.setText(" " + String.format("%02d", min) + ":" + String.format("%02d", sec));
