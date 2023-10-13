@@ -27,17 +27,13 @@ public class ScreenControllerTest {
 
     @Test
     public void testOpenScreen() {
-        // Start by checking the initial state, that there are no screens open.
         assertEquals(true, ScreenController.openedScreens.isEmpty());
 
-        // Open the MENU screen.
         screenController.openScreen(ScreenController.Screen.MENU);
 
         assertEquals(true, ScreenController.openedScreens.contains(ScreenController.Screen.MENU));
         assertEquals(ScreenController.Screen.MENU, ScreenController.openedScreens.get(ScreenController.openedScreens.size() - 1));
 
         assertEquals(false, ScreenController.openedScreens.contains(ScreenController.Screen.DIFFICULTY));
-
     }
-
 }
