@@ -3,7 +3,7 @@
 ## T1: 'testOpenScreen'
 
 ### วัตถุประสงค์
-การทดสอบนี้มีวัตถุประสงค์เพื่อตรวจสอบฟังก์ชัน `openScreen` เมื่อเปิดหน้าจอประเภทต่าง ๆ ในเงื่อนไขการส่ง parameter ที่แตกต่างกัน
+การทดสอบนี้มีวัตถุประสงค์เพื่อตรวจสอบฟังก์ชัน `openScreen` เมื่อเปิดหน้าจอประเภทต่างๆ ที่แตกต่างกันและเปิดพร้อมกัน จะสามารถเปิดหน้าจอได้อย่างถูกต้อง
 
 ### Interface-Base
 
@@ -28,25 +28,26 @@
 ### Functionality-Base
 
 * Develop characteristics
-    * C1 = เรียกใช้ openScreen โดยส่ง null เป็นพารามิเตอร์
-    * C2 = เรียกใช้ openScreen โดยส่ง Screen.MENU เป็นพารามิเตอร์
-    * C3 = เรียกใช้ openScreen โดยส่ง Screen.DIFFICULTY เป็นพารามิเตอร์
+    * C1 = ไม่มี Screen ใดเปิดอยู่เลย
+    * C2 = Screen ถูกเปิดขึ้นมา 1 Screen
+    * C3 = Scrren ที่เปิดอยู่มีมากกว่าหนึ่ง 
 
 * Partition characteristics
 
-  | Characteristic                                | b1  | b2 |
-  |----------------------------------------------|----|----|
-  | C1: ใช้ openScreen โดยส่ง null เป็นพารามิเตอร์                | True  | False  |
-  | C2: ใช้ openScreen โดยส่ง Screen.MENU เป็นพารามิเตอร์         | True  | False  |
-  | C3: ใช้ openScreen โดยส่ง Screen.DIFFICULTY เป็นพารามิเตอร์    | True  | False  |
+  | Characteristic                                | b1            | b2        | b3          | b4           |
+  |----------------------------------------------|---------------|------------|------------|--------------|
+  | C1: ไม่มี Screen ใดเปิดอยู่เลย              | True      | False  |             |              |
+  | C2: เปิด Screen อย่างน้อย 1 ตัว              | 1             | 2          | 3            | 4            |
+  | C3: สั่งเปิด Screen ได้อย่างถูกต้อง         | True          | False      |             |              |
+
 
 * Identify (possible) values
 
-  | Characteristic                                | b1  | b2 |
-  |----------------------------------------------|------------------------|---------------------------|
-  | C1: ใช้ openScreen โดยส่ง null เป็นพารามิเตอร์                | Screen.MENU OFF  | Screen.DIFFICULTY OFF  |
-  | C2: ใช้ openScreen โดยส่ง Screen.MENU เป็นพารามิเตอร์         | Screen.MENU ON  | Screen.DIFFICULTY OFF  |
-  | C3: ใช้ openScreen โดยส่ง Screen.DIFFICULTY เป็นพารามิเตอร์    | Screen.MENU OFF  | Screen.DIFFICULTY
+  | Characteristic                                | b1                 | b2        | b3          | b4           |
+  |--------------------------------------------------|---------------|------------|------------|--------------|
+  | C1: ไม่มี Screen ใดเปิดอยู่เลย                     | is Empty      | is not Empty  |             |              |
+  | C2: เปิด Screen อย่างน้อย 1 ตัว                | MENU     | MENU and GAME   | MENU and GAME and DIFFICULTY   | MENU and GAME and DIFFICULTY and THEME_SELECT    |
+  | C3: สั่งเปิด Screen ได้อย่างถูกต้อง            | True          | False      |             |              |
 
 ### Input domain modelling
 1. Identify testable functions
@@ -63,33 +64,40 @@
         * C3 = เรียกใช้ openScreen โดยส่ง Screen.DIFFICULTY เป็นพารามิเตอร์
     * Partition characteristics
 
-      | Characteristic                                | b1  | b2 |
-      |----------------------------------------------|----|----|
-      | C1: เรียกใช้ openScreen โดยส่ง null เป็นพารามิเตอร์                | True  | False  |
-      | C2: เรียกใช้ openScreen โดยส่ง Screen.MENU เป็นพารามิเตอร์         | True  | False  |
-      | C3: เรียกใช้ openScreen โดยส่ง Screen.DIFFICULTY เป็นพารามิเตอร์    | True  | False  |
-
+      | Characteristic                                | b1            | b2        | b3          | b4           |
+      |----------------------------------------------|---------------|------------|------------|--------------|
+      | C1: ไม่มี Screen ใดเปิดอยู่เลย              | True      | False  |             |              |
+      | C2: เปิด Screen อย่างน้อย 1 ตัว              | 1             | 2          | 3            | 4            |
+      | C3: สั่งเปิด Screen ได้อย่างถูกต้อง         | True          | False      |             |              |
     * Identify (possible) values
 
-      | Characteristic                                | b1  | b2 |
-      |----------------------------------------------|------------------------|---------------------------|
-      | C1: เรียกใช้ openScreen โดยส่ง null เป็นพารามิเตอร์                | Screen.MENU OFF  | Screen.DIFFICULTY OFF  |
-      | C2: เรียกใช้ openScreen โดยส่ง Screen.MENU เป็นพารามิเตอร์         | Screen.MENU ON  | Screen.DIFFICULTY OFF  |
-      | C3: เรียกใช้ openScreen โดยส่ง Screen.DIFFICULTY เป็นพารามิเตอร์    | Screen.MENU OFF  | Screen.DIFFICULTY ON  |
+      | Characteristic                                | b1            | b2        | b3          | b4           |
+      |----------------------------------------------|---------------|------------|------------|--------------|
+      | C1: ไม่มี Screen ใดเปิดอยู่เลย              | is Empty      | is not Empty  |             |              |
+      | C2: เปิด Screen อย่างน้อย 1 ตัว              | MENU     | MENU and GAME   | MENU and GAME and DIFFICULTY   | MENU and GAME and DIFFICULTY and THEME_SELECT    |
+      | C3: สั่งเปิด Screen ได้อย่างถูกต้อง         | True          | False      |             |              |
 
 4. Combine partitions into tests
     * Assumption: choose Pair-Wise Coverage (PWC)
-    * Test requirements -- number of tests (lower bound) = 2 * 2 * 2 = 8
-    * C1:C2:C3 -> (C1b1, C2b1, C3b1), (C1b1, C2b2, C3b1),
-      (C1b2, C2b1, C3b2), (C1b2, C2b2, C3b2)
+    * Test requirements -- number of tests (lower bound) = 4 * 2 = 8
+       * C1:C2 -> (C1b1, C2b1) (C1b1, C2b2) (C1b1, C2b3) (C1b1, C2b4) (C1b2, C2b1) (C1b2, C2b2) (C1b2, C2b3) (C1b2, C2b4)
+       * C1:C3 -> (C1b1, C3b1) (C1b1, C3b2) (C1b2, C3b1) (C1b2, C3b2)
+       * C2:C3 -> (C2b1, C3b1) (C2b1, C3b2) (C2b2, C3b1) (C2b2, C3b2) (C2b3, C3b1) (C2b3, C3b2) (C2b4, C3b1) (C2b4, C3b2)
+       * Combination -> (C1b1, C2b1, C3b1) (C1b1, C2b2, C3b1) (C1b1, C2b3, C3b1) (C1b1, C2b4, C3b1) (C1b2, C2b1, C3b2) (C1b2, C2b2, C3b2) (C1b2, C2b3, C3b2) (C1b2, C2b4, C3b2)
+
 5. Derive test values
 
-   | Test | Screen         | Expected value    |
-   |------|----------------|-------------------|
-   | T1   | Screen.MENU OFF Screen.MENU ON Screen.MENU OFF | All False         |
-   | T2   | Screen.MENU OFF Screen.DIFFICULTY OFF Screen.MENU OFF | All False         |
-   | T3   | Screen.DIFFICULTY OFF Screen.MENU ON Screen.DIFFICULTY ON | All True    |
-   | T4   | Screen.DIFFICULTY OFF Screen.DIFFICULTY OFF Screen.DIFFICULTY ON | DIFFICULTY True |
+   | Test | Screen       | Open Screen Type    | Correct  | Expected Value |
+   |------|------------------|--------------------|---------------------|-----------------|
+   | T1   | is Empty         | GAME               | True                | Pass       |
+   | T2   | is Empty         | MENU and GAME      | True               | Pass       |
+   | T3   | is Empty         | MENU and GAME and DIFFICULTY             | True                |     Pass   |
+   | T4   | is Empty         | MENU and GAME and DIFFICULTY and THEME_SELECT | True               | Pass       |
+   | T5   | is not Empty         | GAME         | False                | Fail       |
+   | T6   | is not Empty         | MENU and GAME         | False               | Fail       |
+   | T7   | is not Empty         | MENU and GAME and DIFFICULTY        | False                | Fail |
+   | T8   | is not Empty         | MENU and GAME and DIFFICULTY and THEME_SELECT        | False               |   Fail     |
+
 
 ## T2: 'testOpenScreen'
 
