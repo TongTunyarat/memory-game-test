@@ -1,36 +1,193 @@
-# Memory Game
+# 2023-ITCS362-5
 
-We just wanted a simple memory game for kids 4+ age. No ads, no complicated screens, but a straightforward nice looking, working and open source game.
+## T1: 'testOpenScreen'
 
-### Features
+### วัตถุประสงค์
+การทดสอบนี้มีวัตถุประสงค์เพื่อตรวจสอบฟังก์ชัน `openScreen` เมื่อเปิดหน้าจอประเภทต่าง ๆ ในเงื่อนไขการส่ง parameter ที่แตกต่างกัน
 
-- 3 Themes : `Animals` :cat2: `Monsters` :octopus: & `Emojis` :smile:  
-- 6 types of difficulties :star2:
-- Sounds on winning :musical_note:
+### Interface-Base
 
-If you have more ideas or you want to add more options / themes / sounds or whatever, fill free to update the source for yourself or open a pull request. :sparkles:
+* Develop characteristics
+    * C1 = สถานะการเปิดหน้าจอครั้งแรก (ไม่มีหน้าจอใดเปิดอยู่)
+    * C2 = สถานะการเปิดหน้าจอที่มีหน้าจออื่นเปิดอยู่แล้ว
 
-<img src="http://www.sromku.com/static/img/pregnancy_memorygame_preview.png"/>
+* Partition characteristics
 
-### Download It
+  | Characteristic                              | b1  | b2 |
+  |--------------------------------------------|----|----|
+  | C1: สถานะการเปิดหน้าจอครั้งแรก     | True  | False  |
+  | C2: สถานะการเปิดหน้าจอที่มีหน้าจออื่นเปิดอยู่แล้ว | True  | False  |
 
-<a href="https://play.google.com/store/apps/details?id=com.snatik.matches">
-  <img alt="Android app on Google Play" src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" />
-</a>
+* Identify (possible) values
 
-### Next
+  | Characteristic                              | b1  | b2 |
+  |--------------------------------------------|------------------------|---------------------------|
+  | C1: สถานะการเปิดหน้าจอครั้งแรก           | มีหน้าจอเปิด  | ไม่มีหน้าจอเปิด  |
+  | C2: สถานะการเปิดหน้าจอที่มีหน้าจออื่นเปิดอยู่แล้ว  | มีหน้าจอเปิด  | ไม่มีหน้าจอเปิด  |
 
-- [ ] 2 player game
-- [x] Add one more theme
-- [ ] Add more sounds
-- [ ] Add Game Services support 
+### Functionality-Base
 
-### License
+* Develop characteristics
+    * C1 = เรียกใช้ openScreen โดยส่ง null เป็นพารามิเตอร์
+    * C2 = เรียกใช้ openScreen โดยส่ง Screen.MENU เป็นพารามิเตอร์
+    * C3 = เรียกใช้ openScreen โดยส่ง Screen.DIFFICULTY เป็นพารามิเตอร์
 
-- The code is: `Apache License 2.0` (See [LICENSE](./LICENSE.md) for details.)
-- For UI assets please check the licenses here:
-	- http://graphicriver.net/item/animals-collection-farm-and-domestic-set/7177721
-	- http://graphicriver.net/item/monster-creation-kit-and-large-pack/8851390
-	- http://graphicriver.net/item/10-fresh-game-backgrounds/9137937
-	- http://graphicriver.net/item/cartoon-games-gui-pack-11-/6056785
+* Partition characteristics
+
+  | Characteristic                                | b1  | b2 |
+  |----------------------------------------------|----|----|
+  | C1: ใช้ openScreen โดยส่ง null เป็นพารามิเตอร์                | True  | False  |
+  | C2: ใช้ openScreen โดยส่ง Screen.MENU เป็นพารามิเตอร์         | True  | False  |
+  | C3: ใช้ openScreen โดยส่ง Screen.DIFFICULTY เป็นพารามิเตอร์    | True  | False  |
+
+* Identify (possible) values
+
+  | Characteristic                                | b1  | b2 |
+  |----------------------------------------------|------------------------|---------------------------|
+  | C1: ใช้ openScreen โดยส่ง null เป็นพารามิเตอร์                | Screen.MENU OFF  | Screen.DIFFICULTY OFF  |
+  | C2: ใช้ openScreen โดยส่ง Screen.MENU เป็นพารามิเตอร์         | Screen.MENU ON  | Screen.DIFFICULTY OFF  |
+  | C3: ใช้ openScreen โดยส่ง Screen.DIFFICULTY เป็นพารามิเตอร์    | Screen.MENU OFF  | Screen.DIFFICULTY
+
+### Input domain modelling
+1. Identify testable functions
+    * testOpenScreen()
+2. Identify parameters, return types, return values, and exceptional behavior
+    * Parameters: screen
+    * Return type: ไม่มีการคืนค่า (void)
+    * Return value: ไม่มีการคืนค่า (void)
+    * Exceptional behavior: ??
+3. Model the input domain
+    * Develop characteristics
+        * C1 = เรียกใช้ openScreen โดยส่ง null เป็นพารามิเตอร์
+        * C2 = เรียกใช้ openScreen โดยส่ง Screen.MENU เป็นพารามิเตอร์
+        * C3 = เรียกใช้ openScreen โดยส่ง Screen.DIFFICULTY เป็นพารามิเตอร์
+    * Partition characteristics
+
+      | Characteristic                                | b1  | b2 |
+      |----------------------------------------------|----|----|
+      | C1: เรียกใช้ openScreen โดยส่ง null เป็นพารามิเตอร์                | True  | False  |
+      | C2: เรียกใช้ openScreen โดยส่ง Screen.MENU เป็นพารามิเตอร์         | True  | False  |
+      | C3: เรียกใช้ openScreen โดยส่ง Screen.DIFFICULTY เป็นพารามิเตอร์    | True  | False  |
+
+    * Identify (possible) values
+
+      | Characteristic                                | b1  | b2 |
+      |----------------------------------------------|------------------------|---------------------------|
+      | C1: เรียกใช้ openScreen โดยส่ง null เป็นพารามิเตอร์                | Screen.MENU OFF  | Screen.DIFFICULTY OFF  |
+      | C2: เรียกใช้ openScreen โดยส่ง Screen.MENU เป็นพารามิเตอร์         | Screen.MENU ON  | Screen.DIFFICULTY OFF  |
+      | C3: เรียกใช้ openScreen โดยส่ง Screen.DIFFICULTY เป็นพารามิเตอร์    | Screen.MENU OFF  | Screen.DIFFICULTY ON  |
+
+4. Combine partitions into tests
+    * Assumption: choose Pair-Wise Coverage (PWC)
+    * Test requirements -- number of tests (lower bound) = 2 * 2 * 2 = 8
+    * C1:C2:C3 -> (C1b1, C2b1, C3b1), (C1b1, C2b2, C3b1),
+      (C1b2, C2b1, C3b2), (C1b2, C2b2, C3b2)
+5. Derive test values
+
+   | Test | Screen         | Expected value    |
+   |------|----------------|-------------------|
+   | T1   | Screen.MENU OFF Screen.MENU ON Screen.MENU OFF | All False         |
+   | T2   | Screen.MENU OFF Screen.DIFFICULTY OFF Screen.MENU OFF | All False         |
+   | T3   | Screen.DIFFICULTY OFF Screen.MENU ON Screen.DIFFICULTY ON | All True    |
+   | T4   | Screen.DIFFICULTY OFF Screen.DIFFICULTY OFF Screen.DIFFICULTY ON | DIFFICULTY True |
+
+## T2: 'testOpenScreen'
+
+### วัตถุประสงค์
+เป็นการทดสอบการแปลงหน่วยจาก dp (density-independent pixels) เป็น px (pixels) ในแอปพลิเคชัน Android และเพื่อยืนยันว่าฟังก์ชัน testPxConversion() สามารถทำการแปลงค่าได้อย่างถูกต้อง
+
+### Interface-Base
+
+* Develop characteristics
+    * C1 = DP Value ที่ต้องการทดสอบ
+    * C2 = PX Value ที่ได้
+
+* Partition characteristics
+
+  | Characteristic                    | b1    | b2    | b3    |
+  |----------------------------------|-------|-------|-------|
+  | C1: DP Value ที่ต้องการทดสอบ    | <=0   | 1     | >1    |
+  | C2: PX Value ที่ได้             | <=0   | 1     | >1    |
+
+* Identify (possible) values
+
+  | Characteristic                    | b1    | b2    | b3    |
+  |----------------------------------|-------|-------|-------|
+  | C1: DP Value ที่ต้องการทดสอบ    | 0.5   | 1.0     | 2.0    |
+  | C2: PX Value ที่ได้             | 0.5  | 1.0  | 2.0  |
+
+### Functionality-Base
+
+* Develop characteristics
+    * C1 = Density value ที่อ่านค่ามา
+    * C2 = DP Value ที่ต้องการทดสอบ
+    * C3 = ค่า PX ที่แปลงค่าเรียบร้อย
+
+* Partition characteristics
+
+  | Characteristic                                | b1            | b2              | b3          |
+  |----------------------------------------------|---------------|-----------------|-------------|
+  | C1: Density value ที่อ่านค่ามา       | Low Density   | Medium Density  | High Density |
+  | C2: DP Value ที่ต้องการทดสอบ        | <=0           | 1               | >1          |
+  | C3: ค่า PX ที่แปลงค่าเรียบร้อย     | < dpValue     | = dpValue       | > dpValue   |
+
+* Identify (possible) values
+
+  | Characteristic                                | b1  | b2  | b3  |
+  |----------------------------------------------|----|----|----|
+  | C1: Density value ที่อ่านค่ามา          | 0.5  | 1.0 | 2.0 |
+  | C2: DP Value ที่ต้องการทดสอบ             | -5  | 1   | 5   |
+  | C3: ค่า PX ที่แปลงค่าเรียบร้อย          | 2.5 | 5   | 10  |
+
+### Input domain modelling
+1. Identify testable functions
+    * testPxConversion()
+2. Identify parameters, return types, return values, and exceptional behavior
+    * Parameters: dpValue
+    * Return type: int
+    * Return value: ค่า pixel ที่แปลงหน่วยแล้ว
+    * Exceptional behavior: ??
+3. Model the input domain
+    * Develop characteristics
+        * C1 = Density value ที่อ่านค่ามา
+        * C2 = DP Value ที่ต้องการทดสอบ
+        * C3 = ค่า PX ที่แปลงค่าเรียบร้อย
+
+    * Partition characteristics
+
+      | Characteristic                                | b1            | b2              | b3          |
+      |----------------------------------------------|---------------|-----------------|-------------|
+      | C1: Density value ที่อ่านค่ามา       | Low Density   | Medium Density  | High Density |
+      | C2: DP Value ที่ต้องการทดสอบ        | <=0           | 1               | >1          |
+      | C3: ค่า PX ที่แปลงค่าเรียบร้อย     | < dpValue     | = dpValue       | > dpValue   |
+
+    * Identify (possible) values
+
+      | Characteristic                                | b1  | b2  | b3  |
+      |----------------------------------------------|----|----|----|
+      | C1: Density value ที่อ่านค่ามา          | 0.5  | 1.0 | 2.0 |
+      | C2: DP Value ที่ต้องการทดสอบ             | -5  | 1   | 5   |
+      | C3: ค่า PX ที่แปลงค่าเรียบร้อย          | 2.5 | 5   | 10  |
+
+4. Combine partitions into tests
+    * Assumption: choose Pair-Wise Coverage (PWC)
+    * Test requirements -- number of tests (lower bound) = 3 * 3 = 9
+      	* C1:C2 -> (C1b1, C2b1) (C1b1, C2b2) (C1b1, C2b3) (C1b2, C2b1) (C1b2, C2b2) (C1b2, C2b3) (C1b3, C2b1) (C1b3, C2b2) (C1b3, C2b3)
+      	* C1:C3 -> (C1b1, C3b1) (C1b1, C3b2) (C1b1, C3b3) (C1b2, C3b1) (C1b2, C3b2) (C1b2, C3b3) (C1b3, C3b1) (C1b3, C3b2) (C1b3, C3b3)
+      	* C2:C3 -> (C2b1, C3b1) (C2b1, C3b2) (C2b1, C3b3) (C2b2, C3b1) (C2b2, C3b2) (C2b2, C3b3) (C2b3, C3b1) (C2b3, C3b2) (C2b3, C3b3)
+      	* Combination -> (C1b1, C2b1, C3b1) (C1b1, C2b1, C3b2) (C1b1, C2b1, C3b3) (C1b2, C2b2, C3b1) (C1b2, C2b2, C3b2) (C1b2, C2b2, C3b3) (C1b3, C2b3, C3b1) (C1b3, C2b3, C3b2) (C1b3, C2b3, C3b3)
+
+5. Derive test values
+
+   | Test | Density value | DP Value | PX Value | Expected Value |
+   |------|---------------|----------|----------|-----------------|
+   | T1   | 0.5           | -5       | -10      | fail            |
+   | T2   | 0.5           | -5       | -5       | fail            |
+   | T3   | 0.5           | -5       | -2.5     | pass            |
+   | T4   | 1.0           | 1        | 0        | fail            |
+   | T5   | 1.0           | 1        | 1        | pass            |
+   | T6   | 1.0           | 1        | 2        | fail            |
+   | T7   | 2.0           | 5        | 1        | fail            |
+   | T8   | 2.0           | 5        | 5        | fail            |
+   | T9   | 2.0           | 5        | 10       | pass            |
 
