@@ -25,11 +25,11 @@ import com.snatik.matches.utils.FontLoader.Font;
 
 public class PopupWonView extends RelativeLayout {
 
-	private TextView mTime;
-	private TextView mScore;
-	private ImageView mStar1;
-	private ImageView mStar2;
-	private ImageView mStar3;
+	public TextView mTime;
+	public TextView mScore;
+	public ImageView mStar1;
+	public ImageView mStar2;
+	public ImageView mStar3;
 	private ImageView mNextButton;
 	private ImageView mBackButton;
 	private Handler mHandler;
@@ -51,14 +51,14 @@ public class PopupWonView extends RelativeLayout {
 		FontLoader.setTypeface(context, new TextView[] { mTime, mScore }, Font.GROBOLD);
 		setBackgroundResource(R.drawable.level_complete);
 		mHandler = new Handler();
-		
+
 		mBackButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Shared.eventBus.notify(new BackGameEvent());
 			}
 		});
-		
+
 		mNextButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -70,9 +70,9 @@ public class PopupWonView extends RelativeLayout {
 	public void setGameState(final GameState gameState) {
 		int min = gameState.remainedSeconds / 60;
 		int sec = gameState.remainedSeconds - min * 60;
-		mTime.setText(" " + String.format("%02d", min) + ":" + String.format("%02d", sec));
+		mTime.setText("" + String.format("%02d", min) + ":" + String.format("%02d", sec));
 		mScore.setText("" + 0);
-		
+
 		mHandler.postDelayed(new Runnable() {
 
 			@Override
@@ -83,44 +83,44 @@ public class PopupWonView extends RelativeLayout {
 		}, 500);
 	}
 
-	private void animateStars(int start) {
+	public void animateStars(int start) {
 		switch (start) {
-		case 0:
-			mStar1.setVisibility(View.GONE);
-			mStar2.setVisibility(View.GONE);
-			mStar3.setVisibility(View.GONE);
-			break;
-		case 1:
-			mStar2.setVisibility(View.GONE);
-			mStar3.setVisibility(View.GONE);
-			mStar1.setAlpha(0f);
-			animateStar(mStar1, 0);
-			break;
-		case 2:
-			mStar3.setVisibility(View.GONE);
-			mStar1.setVisibility(View.VISIBLE);
-			mStar1.setAlpha(0f);
-			animateStar(mStar1, 0);
-			mStar2.setVisibility(View.VISIBLE);
-			mStar2.setAlpha(0f);
-			animateStar(mStar2, 600);
-			break;
-		case 3:
-			mStar1.setVisibility(View.VISIBLE);
-			mStar1.setAlpha(0f);
-			animateStar(mStar1, 0);
-			mStar2.setVisibility(View.VISIBLE);
-			mStar2.setAlpha(0f);
-			animateStar(mStar2, 600);
-			mStar3.setVisibility(View.VISIBLE);
-			mStar3.setAlpha(0f);
-			animateStar(mStar3, 1200);
-			break;
-		default:
-			break;
+			case 0:
+				mStar1.setVisibility(View.GONE);
+				mStar2.setVisibility(View.GONE);
+				mStar3.setVisibility(View.GONE);
+				break;
+			case 1:
+				mStar2.setVisibility(View.GONE);
+				mStar3.setVisibility(View.GONE);
+				mStar1.setAlpha(0f);
+				animateStar(mStar1, 0);
+				break;
+			case 2:
+				mStar3.setVisibility(View.GONE);
+				mStar1.setVisibility(View.VISIBLE);
+				mStar1.setAlpha(0f);
+				animateStar(mStar1, 0);
+				mStar2.setVisibility(View.VISIBLE);
+				mStar2.setAlpha(0f);
+				animateStar(mStar2, 600);
+				break;
+			case 3:
+				mStar1.setVisibility(View.VISIBLE);
+				mStar1.setAlpha(0f);
+				animateStar(mStar1, 0);
+				mStar2.setVisibility(View.VISIBLE);
+				mStar2.setAlpha(0f);
+				animateStar(mStar2, 600);
+				mStar3.setVisibility(View.VISIBLE);
+				mStar3.setAlpha(0f);
+				animateStar(mStar3, 1200);
+				break;
+			default:
+				break;
 		}
 	}
-	
+
 	private void animateStar(final View view, int delay) {
 		ObjectAnimator alpha = ObjectAnimator.ofFloat(view, "alpha", 0, 1f);
 		alpha.setDuration(100);
@@ -133,9 +133,9 @@ public class PopupWonView extends RelativeLayout {
 		animatorSet.setDuration(600);
 		view.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 		animatorSet.start();
-		
+
 		mHandler.postDelayed(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				Music.showStar();
