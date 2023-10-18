@@ -29,8 +29,8 @@
 
 * Develop characteristics
     * C1 = ไม่มี Screen ใดเปิดอยู่เลย
-    * C2 = Screen ถูกเปิดขึ้นมา 1 Screen
-    * C3 = Scrren ที่เปิดอยู่มีมากกว่าหนึ่ง 
+    * C2 = เปิด Screen อย่างน้อย 1 ตัว 
+    * C3 = สั่งเปิด Screen ได้อย่างถูกต้อง   
 
 * Partition characteristics
 
@@ -59,9 +59,9 @@
     * Exceptional behavior: ??
 3. Model the input domain
     * Develop characteristics
-        * C1 = เรียกใช้ openScreen โดยส่ง null เป็นพารามิเตอร์
-        * C2 = เรียกใช้ openScreen โดยส่ง Screen.MENU เป็นพารามิเตอร์
-        * C3 = เรียกใช้ openScreen โดยส่ง Screen.DIFFICULTY เป็นพารามิเตอร์
+        * C1 = ไม่มี Screen ใดเปิดอยู่เลย   
+        * C2 = เปิด Screen อย่างน้อย 1 ตัว
+        * C3 = สั่งเปิด Screen ได้อย่างถูกต้อง
     * Partition characteristics
 
       | Characteristic                                | b1            | b2        | b3          | b4           |
@@ -145,7 +145,7 @@
   |----------------------------------------------|----|----|----|
   | C1: Density value ที่อ่านค่ามา          | 0.5  | 1.0 | 2.0 |
   | C2: DP Value ที่ต้องการทดสอบ             | -5  | 1   | 5   |
-  | C3: ค่า PX ที่แปลงค่าเรียบร้อย          | 2.5 | 5   | 10  |
+  | C3: ค่า PX ที่แปลงค่าเรียบร้อย          | -2.5 | 5   | 10  |
 
 ### Input domain modelling
 1. Identify testable functions
@@ -175,7 +175,7 @@
       |----------------------------------------------|----|----|----|
       | C1: Density value ที่อ่านค่ามา          | 0.5  | 1.0 | 2.0 |
       | C2: DP Value ที่ต้องการทดสอบ             | -5  | 1   | 5   |
-      | C3: ค่า PX ที่แปลงค่าเรียบร้อย          | 2.5 | 5   | 10  |
+      | C3: ค่า PX ที่แปลงค่าเรียบร้อย          | -2.5 | 5   | 10  |
 
 4. Combine partitions into tests
     * Assumption: choose Pair-Wise Coverage (PWC)
